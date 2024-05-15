@@ -1,0 +1,75 @@
+Tema 4
+
+1 - Que función se utiliza para la limpieza automática de tensores en memoria, y en caso de querer mantener algún tensor en memoria una vez terminada la función en cuestión, que método se utiliza para ello?.
+
+La función que se utiliza para la limpieza automática de tensores en memoria es tf.dispose(). 
+
+Si en caso de querer mantener algún tensor en memoria una vez terminada la función que lo creó, se utiliza el método tf.keep(). Este método "protege un tensor" de ser eliminado automáticamente, permaneciendo en memoria hasta que explícitamente se lo libere utilizando tf.dispose().
+
+Para estos ejemplos, el libro "Aprendizaje Automático" explica:
+
+// se crea un tensor
+const tensorA = tf.tensor([1, 2, 3, 4]);
+
+// se mantiene el tensor en memoria incluso después de que esta función termine
+const tensorAKept = tf.keep(tensorA);
+
+// se libera el tensor original, pero el tensor mantenido permanece en memoria
+tensorA.dispose();
+
+// se realizan operaciones con tensorAKept
+// ...
+
+// Se libera el tensor mantenido
+tensorAKept.dispose();
+
+
+
+
+2 - Cual es el cuarto valor agregado a un RGB que lo extiende y para que sirve. Escriba un tensor con los valores máximos y mínimos que pueden tomar el RGB con la extensión adicional planteada.
+
+El cuarto valor agregado a un RGB que lo extiende se refiere al canal alfa (RGBA), que representa la transparencia de un píxel en una imagen. Sirve para controlar la opacidad de un píxel, siendo útil cuando se requiere superposición de imágenes, efectos de mezcla, o en síntesis, cuando se necesite controlar la visibilidad de elementos en una imagen.
+
+
+
+
+3 - Escriba un código en una sola línea que cree un tensor con la forma [10, 10] con números aleatorios (Random) del 1 al 4 y que el tensor solo muestre datos enteros, utilice el método propuesto en la sección API correspondiente del sitio de https://js.tensorflow.org/api/latest/.
+
+opción 1:
+tf.randomUniformInt([10, 10], 1, 5).print();
+
+opción 2:
+tf.randomUniform([10, 10], 1, 5, 'int32').print();
+
+opción 3:
+tf.round(tf.randomUniform([10, 10], 1, 4)).print();
+
+
+
+
+
+
+4 – Donde Puedo ejecutar un modelo de aprendizaje? Justifique su respuesta.
+   
+    a - CPU
+    b - GPU	
+    c - memoria RAM
+		
+Creo que la pregunta es capciosa, la elección de donde ejecutar un modelo de aprendizaje depende en gran medida de la complejidad del modelo y los recursos disponibles. Es decir:
+
+a - CPU: como unidad de procesamiento central (CPU) es adecuada para ejecutar modelos de aprendizaje simples o para tareas que no requieren una gran cantidad de cálculos simultáneos. Esla más accesible ya que la mayoría de las computadoras tienen al menos una CPU.
+
+b - GPU: como unidad de procesamiento gráfico (GPU) es altamente eficiente en paralelo y es ideal para ejecutar modelos de aprendizaje profundo y otros algoritmos intensivos en cálculos. Las GPUs pueden realizar múltiples operaciones en paralelo, lo que acelerará significativamente el entrenamiento y la inferencia de modelos de aprendizaje profundo. Sin embargo, no todas las computadoras la tienen y su costo incrementa.
+
+c - Memoria RAM: La memoria RAM (Random Access Memory), si bien, es un componente esencial para ejecutar modelos de aprendizaje, ya que almacena temporalmente los datos y los resultados de cálculo durante la ejecución del modelo, se encuentra limitada por la cantidad de memoria RAM disponible.
+
+Que, si se tratase de dónde ejecutar con mejor rendimiento un modelo de aprendizaje, la ejecución en una GPU es la mejor respuesta.
+
+
+
+
+
+5 - Corrija el sistema Adjunto 	
+
+
+6 - Realice un sistema que entrene 525 épocas y que prediga el valor de Y para un valor x = 50 para la formula Y = 2X + 8 , ingresando para el entrenamiento 15 valores de pruebas comenzando por -3,  mostrando en pantalla el valor predicho de Y. Grafique la función de perdida.
